@@ -33,13 +33,14 @@
     #maincontent {
       width: 1000px;
       margin: auto;
-      height: 2200px;
+      height: 340px;
     }
 
     #suppcontent {
       padding-top: 0px;
       background-color: black;
       color: #BBBBBB;
+      font-size: 16px;
     }
     
     #content {
@@ -52,7 +53,6 @@
     }
     .desc {
       color: #888888;
-      font-size: small;
     }
     .center {
       display: block;
@@ -81,10 +81,9 @@
       color: #3376cb;
     }
     #abstract {
-      margin-top: 20px;
       line-height: 1.3;
       width: 1000px;
-      font-size: 18px;
+      font-size: 16px;
     }
     h2 {
       color: #555555;
@@ -101,7 +100,7 @@
     }
     h2.abstract {
       color: #555555;
-      margin-top: 30px;
+      margin-top: 0px;
     }
 
     #files {
@@ -139,33 +138,13 @@
   <div id="abstract">
     <h2 class="abstract"> Abstract </h2>
     This paper presents KeypointNet, an end-to-end geometric reasoning framework to learn an optimal set of category-specific 3D keypoints, along with their detectors.  Given a single image, KeypointNet extracts 3D keypoints that are optimized for a downstream task.  We demonstrate this framework on 3D pose estimation by proposing a differentiable objective that seeks the optimal set of keypoints for recovering the relative pose between two views of an object. Our model discovers geometrically and semantically consistent keypoints across viewing angles and instances of an object category. Importantly, we find that our end-to-end framework using no ground-truth keypoint annotations outperforms a fully supervised baseline using the same neural network architecture on the task of pose estimation.  The discovered 3D keypoints on the car, chair, and plane categories of <a href="https://www.shapenet.org/">ShapeNet</a> are visualized below.
-<div id="files" class="center">
-[ <a href="https://arxiv.org/pdf/1807.03146">Paper</a> ]&nbsp;&nbsp;&nbsp;&nbsp;
-  [ <a href="https://github.com/tensorflow/models/tree/master/research/keypointnet">Code</a> ]
-</div>
-    <h2>Method overview</h2>
-    <img src="overview.jpg" width="1000px" style="display:block; margin-left:auto; margin-right:auto; margin-bottom: 5px; margin-top:-10px;">
-    During training, two views of the same object are given as input to the KeypointNet. The known rigid transformation (R,t) between the two views is provided as a supervisory signal. We optimize an ordered list of 3D keypoints that are consistent in both views and enable recovery of the transformation.  During inference, KeypointNet extracts 3D keypoints from an individual input image.
-    <h2>Multi-view consistency</h2>
-    We can use camera perspective projection and the known rigid transformation to map 3D keypoints from one view to the other,
-    <img src="method/uvz.png" width="500px" style="display:block; margin-left:auto; margin-right:auto; margin-bottom: 10px; margin-top:10px;">
-    Then, we encourage the detected keypoint in each to be consistent with the projections from other views,
-    <img src="method/l_cons.png" width="680px" style="display:block; margin-left:auto; margin-right:auto; margin-bottom: 10px; margin-top:10px;">
-    <h2>Relative pose estimation</h2>
-    Given two matrices of keypoints in a global coordinate frame, the optimal rotation that minimizes the root mean squared error between two sets of points is estimated as,
-    <img src="method/svd.png" width="750px" style="display:block; margin-left:auto; margin-right:auto; margin-bottom: 10px; margin-top:10px;">
-    We define the relative pose estimation loss in terms of the angular distance between the estimated and ground truth rotation matrices,
-    <img src="method/l_pose.png" width="400px" style="display:block; margin-left:auto; margin-right:auto; margin-bottom: 10px; margin-top:10px;">
-    <h2>Additional keypoint characteristics</h2>
-    <ul>
-      <li>Separation loss: No two keypoints should share the same 3D location.</li>
-      <li>Silhouette consistency: Keypoints should lie within the object’s silhouette.</li>
-    </ul>
-    <h2>Quantitative Evaluation</h2>
-    <img src="method/table.png" width="1000px" style="display:block; margin-left:auto; margin-right:auto; margin-bottom: 10px; margin-top:10px;">
+    <div id="files" class="center" style="margin-top: 10px">
+      [ <a href="https://arxiv.org/pdf/1807.03146">Paper</a> ]&nbsp;&nbsp;&nbsp;&nbsp;
+      [ <a href="https://github.com/tensorflow/models/tree/master/research/keypointnet">Code</a> ]
+    </div>
   </div>
 </div>
-  <div id="suppcontent">
+<div id="suppcontent">
   <div style="height: 20px; background-color: #414141;"></div>
   <div id="content">
     <!--<h1 class="supp">3D Keypoints</h1>-->
@@ -202,7 +181,7 @@
       <!--<td><img src="html_files/ab_noise0.gif" width="180"><br>No noise<br><span class="desc">Notice how points are no longer stationary.</span></td>-->
       <td><img src="html_files/ab_oncar.gif" width="180"><br>No silhouette loss<br><span class="desc">This causes the points to lie outside the car.</span></td>
     </tr>
-</table>
+  </table>
 <h2>Varying number of keypoints</h2>
 We trained the network with varying number of keypoints [3, 5, 8, 10, 15, 20]. The network starts by discovering the most prominent components such as the head and wings, then gradually tracks more parts as the number increases. Colors do not correspond across results as they're independent. <br>
 <img src="./planekps/anim.gif" width="165"><img src="./planekps/anim(1).gif" width="165"><img src="./planekps/anim(2).gif" width="165"><img src="./planekps/anim(3).gif" width="165"><img src="./planekps/anim(4).gif" width="165"><img src="./planekps/anim(5).gif" width="165">
@@ -214,7 +193,7 @@ We trained the network with varying number of keypoints [3, 5, 8, 10, 15, 20]. T
   <span class="center"><img src="html_files/car_none.gif" width="180"></span><br>
   
   <br><br>
-<video width="1000" controls loop autoplay muted>
+<video width="1100" controls loop autoplay muted>
   <source src="html_files/vis3d.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
